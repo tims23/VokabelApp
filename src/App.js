@@ -11,7 +11,7 @@ function App() {
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>
-				<p>Test 3 für firebase</p>
+				<p>Test 4 für firebase</p>
 				<Haus />
 				<p>Soos</p>
 				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
