@@ -30,5 +30,6 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
+          publish_dir: ./build
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
