@@ -8,29 +8,32 @@ on:
       - release-production-*
 
 jobs:
-  deploy_to_firebase_hosting:
-
+  build:
+    name: Build
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@master
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Packages
         run: npm install
       - name: Build page
         run: npm run build
-      - name: save build
+      - name: Upload build
         uses: actions/upload-artifact@master
         with:
           name: build
           path: build
 
-      - name: Checkout the repository
-        uses: actions/checkout@master
-      
+  deploy_to_firebase:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
       - name: Download build
         uses: actions/download-artifact@master
         with: 
@@ -40,6 +43,5 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
-          publish_dir: ./build
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
