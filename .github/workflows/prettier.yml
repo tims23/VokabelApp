@@ -3,7 +3,9 @@ name: Prettify Code
 # This action works with pull requests and pushes
 on:
   pull_request:
+    branches: master
   push:
+    branches: master
 
 jobs:
   prettier:
