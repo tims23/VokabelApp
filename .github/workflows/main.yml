@@ -1,6 +1,6 @@
 name: Build and Deploy
 on:
-  merge:
+  pull:
   push:
     branches:
       - master
