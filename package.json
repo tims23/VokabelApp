@@ -15,7 +15,6 @@
 		"reactfire": "^2.0.3"
 	},
 	"scripts": {
-		"commit": "git commit -m 'test",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
