@@ -10,7 +10,7 @@ function App() {
 		<div className="App">
 			<Router>
 				<Switch>
-					<Route path="/header">
+					<Route path="">
 						<header className="App-header">
 							<img src={logo} className="App-logo" alt="logo" />
 							<p>Eine leere WebApp</p>
