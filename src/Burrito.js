@@ -12,6 +12,7 @@ export function Burrito() {
 
 	return (
 		<div>
+		<p>tested</p>
 			<p
 				onClick={() => {
 					burrito.yummy = !burrito.yummy;
