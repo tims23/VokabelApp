@@ -15,7 +15,8 @@
 		"reactfire": "^2.0.3"
 	},
 	"scripts": {
-		"start": "react-scripts start",
+		"start": "git pull && react-scripts start",
+		"rawStart": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
