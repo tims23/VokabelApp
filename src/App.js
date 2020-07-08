@@ -12,7 +12,7 @@ function App() {
 				<Switch>
 					<Route path="/header">
 						<header className="App-header">
-		<p>Hi</p>
+		<p>Hrdgfi</p>
 							<img src={logo} className="App-logo" alt="logo" />
 							<p>Eine leere WebApp</p>
 							<SuspenseWithPerf
