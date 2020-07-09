@@ -4,10 +4,12 @@ import './App.css';
 import {SuspenseWithPerf} from 'reactfire';
 import Burrito from './Burrito';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import Mathis from './Mathis';
 
 function App() {
 	return (
 		<div className="App">
+			<Mathis></Mathis>
 			<Router>
 				<Switch>
 					<Route path="">
