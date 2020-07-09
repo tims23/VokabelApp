@@ -4,7 +4,7 @@ export class Mathis extends Component {
     render() {
         return (
             <div>
-                <p>Ich heiße Badger</p>
+                <p>Ich heiße Badger2</p>
             </div>
         )
     }
