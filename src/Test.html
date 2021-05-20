@@ -1,0 +1,36 @@
+<tr data-ng-repeat="card in view.selectedCards track by card.id" data-ng-class="{set:card.checked, grey: card.isInactive() || card.content.getAddedByUser()}" data-ng-click="checkCard(card)" class="ng-scope">
+    <td class="lib_check" >
+        <!-- ngIf: !card.content.getAddedByUser() --><i class="icon_check checkbox ng-scope" data-ng-if="!card.content.getAddedByUser()"></i><!-- end ngIf: !card.content.getAddedByUser() -->
+        <!-- ngIf: card.content.getAddedByUser() -->
+    </td>
+    <td class="item_content">
+        <div x-p6-smart-tooltip-create="78" style="position: relative" data-ng-class="{'up-menu' : !$first, 'down-menu' : $index < 3 }" class="up-menu">
+            <div class="text_container smart_name ng-binding">ähnlich</div>
+            <div class="icon_container">
+                <!-- ngIf: card.uiContent.questionAttach -->
+            </div>
+        </div>
+    </td>
+    <td class="item_content">
+        <div x-p6-smart-tooltip-create="80" style="position: relative" data-ng-class="{'up-menu' : !$first, 'down-menu' : $index < 3 }" class="up-menu">
+            <div class="text_container smart_name ng-binding">akin</div>
+            <div class="icon_container"><!-- ngIf: card.uiContent.answerAttach --></div>
+        </div>
+    </td>
+    <td>
+        <div x-p6-smart-tooltip-create="80" style="position: relative" data-ng-class="{'up-menu' : !$first, 'down-menu' : $index < 3 }" class="up-menu">
+            <span class="smart_name ng-binding">The everything store</span>
+        </div>
+    </td>
+    <!-- ngIf: card.isActivated() || card.isInactive() --><td class="direction_column ng-scope" data-ng-if="card.isActivated() || card.isInactive()">
+        <!-- ngIf: showNormalArrow(card) --><span data-ng-if="showNormalArrow(card)" data-ng-class="{grey: isGreyNormalArrow(card)}" class="ng-scope"><div class="arrow_right centered"></div></span><!-- end ngIf: showNormalArrow(card) -->
+        <!-- ngIf: showOppositeArrow(card) --><span data-ng-if="showOppositeArrow(card)" data-ng-class="{grey: isGreyOppositeArrow(card)}" class="ng-scope"><div class="arrow_left centered two_arrow" data-ng-class="{two_arrow:card.normal.isActive() || card.normal.wasDirectionActive()  || card.normal.phase > 0}"></div></span><!-- end ngIf: showOppositeArrow(card) -->
+    </td><!-- end ngIf: card.isActivated() || card.isInactive() -->
+    <td class="phase_col">
+        <!-- ngIf: showNormalPhase(card) --><span class="p6phase ng-binding ng-scope" data-ng-if="showNormalPhase(card)" data-ng-class="{grey: isNormalPhaseGrey(card)}">2</span><!-- end ngIf: showNormalPhase(card) -->
+        <!-- ngIf: showLearnedNormalIcon(card) -->
+        <br>
+        <!-- ngIf: showOppositePhase(card) --><span class="p6phase scnd ng-binding ng-scope" data-ng-if="showOppositePhase(card)" data-ng-class="{grey: isOppositePhaseGrey(card)}">2</span><!-- end ngIf: showOppositePhase(card) -->
+        <!-- ngIf: showLearnedOppositeIcon(card) -->
+    </td>
+</tr>

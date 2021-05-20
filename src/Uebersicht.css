@@ -1,0 +1,36 @@
+@media screen and (min-width: 700px) {
+	#Uebersicht {
+		border: red 3px solid;
+		width: 70%;
+		margin: auto;
+	}
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto;
+	align-content: center;
+	grid-gap: 10px;
+}
+
+.grid-item {
+	display: grid;
+	align-content: center;
+}
+
+.grid-item div {
+	padding: 5px 5px;
+	background: mintcream;
+	border-radius: 18px;
+	box-shadow: 5px 5px 15px;
+	margin: auto;
+}
+
+.grid-item h4 {
+	color: mediumseagreen;
+	margin: 0px;
+}
+
+.grid-item h2 {
+	margin: 10px 20px 20px;
+}

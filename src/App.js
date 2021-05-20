@@ -5,15 +5,15 @@ import {SuspenseWithPerf} from 'reactfire';
 import Burrito from './Burrito';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Mathis from './Mathis';
+import Uebersicht from './Uebersicht';
 
 function App() {
 	return (
 		<div className="App">
-			<Mathis></Mathis>
 			<Router>
 				<Switch>
 					<Route path="">
-						<header className="App-header">
+						{/*<header className="App-header">
 							<img src={logo} className="App-logo" alt="logo" />
 							<p>Eine leere WebApp</p>
 							<SuspenseWithPerf
@@ -23,6 +23,8 @@ function App() {
 								<Burrito />
 							</SuspenseWithPerf>
 						</header>
+						*/}
+						<Uebersicht />
 					</Route>
 					<Route path="/another">
 						<p>Hi</p>
