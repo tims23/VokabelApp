@@ -1,0 +1,26 @@
+.VokInput {
+	background-color: #333333;
+	padding: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.VokInput img {
+	position: absolute;
+	right: 100px;
+	background: #ededed;
+	border-radius: 18px;
+	box-shadow: 1px 1px 3px #595959;
+	padding: 8px;
+	width: 17px;
+}
+
+.VokInput input {
+	background-color: #cdcdcd;
+	border-radius: 5px;
+	border: 0px;
+	height: 30px;
+	width: 250px;
+	margin-left: 5%;
+	margin-right: 5%;
+}

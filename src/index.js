@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {FirebaseAppProvider} from 'reactfire';
+import {FirebaseAppProvider, firestore} from 'reactfire';
 import {Router} from 'react-router-dom';
+import firebase from 'firebase';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBPDYXKqmtZyD9e8_W0N98z_2lgdSSh970',

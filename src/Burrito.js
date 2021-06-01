@@ -6,10 +6,6 @@ export function Burrito() {
 
 	const burrito = useFirestoreDocData(burritoRef);
 
-	const user = useUser();
-
-	const auth = useAuth();
-
 	return (
 		<div>
 			<p

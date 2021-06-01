@@ -1,0 +1,43 @@
+#BurgerMenu span {
+	display: block;
+	width: 25px;
+	height: 4px;
+	margin-bottom: 5px;
+	position: relative;
+
+	background: #cdcdcd;
+	border-radius: 3px;
+
+	transform-origin: left;
+
+	transition: transform 0.5s cubic-bezier(0.7, 0.1, 0.05, 1.0), opacity 0.2s ease;
+}
+
+#BurgerMenu:hover span:nth-child(1) {
+	transform: translateX(3px);
+}
+
+#BurgerMenu:hover span:nth-child(3) {
+	transform: translateX(6px);
+}
+
+#BurgerMenu:hover span:nth-child(2) {
+	transform: translateX(9px);
+}
+
+#BurgerMenu.clicked span {
+	background-color: #595959;
+}
+
+#BurgerMenu.clicked span:nth-child(1) {
+	transform: rotateZ(45deg);
+}
+
+#BurgerMenu.clicked span:nth-child(3) {
+	transform: rotateZ(-45deg);
+}
+
+#BurgerMenu.clicked span:nth-child(2) {
+	transform: translateX(20px);
+	opacity: 0;
+}

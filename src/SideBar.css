@@ -1,0 +1,47 @@
+body {
+	/* make it look decent enough */
+	background: #232323;
+	color: #cdcdcd;
+	font-family: "Avenir Next", "Avenir", sans-serif;
+}
+
+#BurgerMenu {
+	z-index: 3;
+	position: fixed;
+	left: 30px;
+	top: 30px;
+
+	transition: left ease-in-out 0.4s 0.1s;
+}
+
+#BurgerMenu.clicked {
+	z-index: 3;
+	position: fixed;
+	left: 340px;
+	top: 30px;
+}
+
+ul {
+	margin-top: 85px;
+	list-style-type: none;
+}
+
+nav {
+	position: fixed;
+	top: 0px;
+	width: 400px;
+	height: 100%;
+	background: #ededed;
+	left: -400px;
+	transition: left ease-in-out 0.5s, color 0.5s cubic-bezier(0.7, 0.2, 0.05, 1.0);
+}
+
+nav.clicked {
+	color: #595959;
+
+	left: 0%;
+}
+
+nav.clicked #BurgerMenu {
+	left: 200px;
+}

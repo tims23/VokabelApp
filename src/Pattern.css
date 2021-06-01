@@ -1,0 +1,158 @@
+.grid-container {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto;
+	align-content: center;
+	grid-gap: 10px;
+}
+
+.grid-item {
+	display: grid;
+	align-content: center;
+	perspective: 1000px;
+}
+
+.exchange,
+.resize {
+	top: 35px;
+	position: absolute;
+	z-index: 2;
+	opacity: 0.0;
+	background: #ededed;
+	border-radius: 18px;
+	box-shadow: 1px 1px 3px #595959;
+	padding: 8px;
+	width: 17px;
+}
+
+.exchange {
+	left: 5px;
+}
+
+.resize {
+	right: 5px;
+}
+
+.grid-item .card:hover,
+.grid-item .card:hover .side-german,
+.grid-item .card:hover .side-english {
+	height: 130px;
+}
+
+.grid-item .card:hover .exchange,
+.grid-item .card:hover .resize {
+	opacity: 0.6;
+}
+
+.grid-item .card:hover .correct,
+.grid-item .card:hover .wrong {
+	opacity: 0.7;
+}
+
+.exchange:hover,
+.resize:hover {
+	transform: scale(1.1);
+	box-shadow: 1px 1px 3px #595959;
+
+	cursor: pointer;
+}
+
+.grid-item .card {
+	margin: auto;
+	height: 90px;
+	width: 210px;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+}
+
+.side-german,
+.side-english {
+	box-sizing: border-box;
+	backface-visibility: hidden;
+	position: absolute;
+	height: 90px;
+	width: 210px;
+	padding: 5px 5px;
+	background: #ededed;
+	border-radius: 18px;
+	box-shadow: 1px 0px 15px #ededed;
+	margin: auto;
+}
+
+.card.clicked {
+	transform: rotateY(180deg);
+}
+
+.side-german {
+	transform: rotateY(-180deg);
+}
+
+.grid-item h4 {
+	margin: 0px;
+}
+
+.grid-item .side-english h4 {
+	color: mediumseagreen;
+	margin: 0px;
+}
+
+.grid-item .side-german h4 {
+	color: tomato;
+	margin: 0px;
+}
+
+.grid-item h2 {
+	overflow: hidden;
+	text-overflow: clip;
+	color: #595959;
+
+	margin: 10px 10px;
+}
+
+.answer {
+	width: 100%;
+	height: 30px;
+}
+
+.correct,
+.wrong {
+	opacity: 0;
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+
+.correct img,
+.wrong img {
+	margin-top: 2.5px;
+	width: 25px;
+}
+
+.correct:hover,
+.wrong:hover {
+	cursor: pointer;
+}
+
+.correct:hover {
+	transform: translateX(-3px) scale(1.1);
+}
+
+.wrong:hover {
+	transform: translateX(3px) scale(1.1);
+}
+
+.correct {
+	border-radius: 10px 0px 0px 10px;
+	margin-left: 20%;
+	background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.wrong {
+	border-radius: 0px 10px 10px 0px;
+	margin-right: 20%;
+	background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
+
+.Pattern-ProgressBar {
+	width: 80%;
+	margin: 20px auto 20px auto;
+}
