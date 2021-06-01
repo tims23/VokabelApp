@@ -1,31 +1,44 @@
 import {firestore} from 'firebase';
 import React, {createContext, useContext, useState, useEffect} from 'react';
+import CookieFunktionen from './CookieFunktionen';
 
 const VokabelContext = createContext();
 const VokabelUpdateContext = createContext();
+
+const date = new Date();
+const currentDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+const completeCurrentDay = new Date(
+	date.getFullYear(),
+	date.getMonth(),
+	date.getDate(),
+	date.getHours(),
+	date.getMinutes()
+);
+
+const lastLoginCookie = new Date(CookieFunktionen.getCookie('lastLogin'));
+const lastLoginTimestamp = firestore.Timestamp.fromDate(lastLoginCookie);
+
+const timestamp = firestore.Timestamp.fromDate(currentDay);
+const completeTimestamp = firestore.Timestamp.fromDate(completeCurrentDay);
 
 export function useVokabeln() {
 	return useContext(VokabelContext);
 }
 
+export async function addVokabel(vok) {
+	vok.LastModified = completeCurrentDay;
+	const res = await firestore().collection('Deutsch-Englisch').add(vok);
+	return res.id;
+}
+
+export function updateVokabel(ref, vok) {
+	console.log('updated');
+	vok.LastModified = completeCurrentDay;
+	firestore().collection('Deutsch-Englisch').doc(ref).set(vok);
+}
+
 function VokabelProvider({children}) {
 	const uid = 'HXNM1uYn6jPll9IShBUc0fGYnMV2';
-
-	const date = new Date();
-	const currentDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-	const completeCurrentDay = new Date(
-		date.getFullYear(),
-		date.getMonth(),
-		date.getDate(),
-		date.getHours(),
-		date.getMinutes()
-	);
-
-	const lastLogin = new Date(2021, 4, 28);
-	const lastLoginTimestamp = firestore.Timestamp.fromDate(lastLogin);
-
-	const timestamp = firestore.Timestamp.fromDate(currentDay);
-	const completeTimestamp = firestore.Timestamp.fromDate(completeCurrentDay);
 
 	const [groupID, setgroupID] = useState(0);
 	const [groups, setgroups] = useState([]);
@@ -120,6 +133,7 @@ function VokabelProvider({children}) {
 					.where('UID', '==', uid)
 					.where('LastModified', '>', lastLoginTimestamp)
 					.onSnapshot((res) => {
+						CookieFunktionen.setCookie('lastLogin', completeCurrentDay, 300);
 						console.log('Vokabelgruppen aktualisiert: ' + res.docs.length + ' Veränderungen ');
 						connect();
 					});
@@ -127,6 +141,7 @@ function VokabelProvider({children}) {
 					.collection('Deutsch-Englisch')
 					.where('LastModified', '>', lastLoginTimestamp)
 					.onSnapshot((res) => {
+						CookieFunktionen.setCookie('lastLogin', completeCurrentDay, 300);
 						console.log('Vokabeln aktualisiert: ' + res.docs.length + ' Veränderungen ');
 						connect();
 					});

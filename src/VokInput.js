@@ -2,6 +2,7 @@ import './VokInput.css';
 import resize from './resize.png';
 
 import React, {Component} from 'react';
+import {addVokabel, updateVokabel} from './VokabelProvider';
 
 export class VokInput extends Component {
 	constructor(props) {
@@ -11,7 +12,9 @@ export class VokInput extends Component {
 			eVokValue: '',
 			dVokValue: '',
 			eSelected: false,
-			dSelected: false
+			dSelected: false,
+			vok: {},
+			uploaded: ''
 		};
 		this.dVokInput = React.createRef();
 		this.eVokInput = React.createRef();
@@ -30,21 +33,39 @@ export class VokInput extends Component {
 	}
 
 	dUnFocusListener = () => {
-		if (this.state.eVokValue != '' && this.state.dVokValue != '' && !this.state.eSelected) {
-			const vokabel = {Deutsch: this.state.dVokValue, Englisch: this.state.eVokValue};
+		setTimeout(async () => {
+			if (this.state.eVokValue != '' && this.state.dVokValue != '' && !this.state.eSelected) {
+				const vokabel = {Deutsch: this.state.dVokValue, Englisch: this.state.eVokValue};
 
-			console.log(vokabel);
-		}
-		this.setState({dSelected: false});
+				if (this.state.uploaded === '') {
+					const res = await addVokabel(vokabel);
+					this.setState({uploaded: res});
+					console.log(res);
+				} else if (this.state.vok.Deutsch !== vokabel.Deutsch && this.state.vok.Englisch !== vokabel.Englisch) {
+					this.setState({vok: vokabel});
+					updateVokabel(this.state.uploaded, vokabel);
+				}
+			}
+			this.setState({dSelected: false});
+		}, 500);
 	};
 
 	eUnFocusListener = () => {
-		if (this.state.eVokValue != '' && this.state.dVokValue != '' && !this.state.dSelected) {
-			const vokabel = {Deutsch: this.state.dVokValue, Englisch: this.state.eVokValue};
+		setTimeout(async () => {
+			if (this.state.eVokValue != '' && this.state.dVokValue != '' && !this.state.dSelected) {
+				const vokabel = {Deutsch: this.state.dVokValue, Englisch: this.state.eVokValue};
 
-			console.log(vokabel);
-		}
-		this.setState({eSelected: false});
+				if (this.state.uploaded === '') {
+					const res = await addVokabel(vokabel);
+					this.setState({uploaded: res});
+					console.log(res);
+				} else if (this.state.vok.Deutsch !== vokabel.Deutsch && this.state.vok.Englisch !== vokabel.Englisch) {
+					this.setState({vok: vokabel});
+					updateVokabel(this.state.uploaded, vokabel);
+				}
+			}
+			this.setState({eSelected: false});
+		}, 500);
 	};
 
 	componentDidMount() {
