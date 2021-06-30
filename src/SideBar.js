@@ -23,12 +23,16 @@ export class SideBar extends Component {
 				/>
 				<nav className={this.state.clicked ? 'clicked' : null}>
 					<ul>
-						<li>
-							<Link to="Lernen">Lernen</Link>
+						<li className="navLink">
+							<Link to="Lernen">
+								<h1 className="navLinkTitle">Lernen</h1>
+							</Link>
 						</li>
-
-						<li>
-							<Link to="Eingabe">Eingabe</Link>
+						<hr />
+						<li className="navLink">
+							<Link to="Eingabe">
+								<h1 className="navLinkTitle">Eingabe</h1>
+							</Link>
 						</li>
 					</ul>
 				</nav>

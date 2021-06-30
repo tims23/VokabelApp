@@ -26,6 +26,36 @@ ul {
 	list-style-type: none;
 }
 
+nav li {
+	height: 50px;
+	transition: all ease-in 0.2s;
+}
+
+nav hr {
+	margin: 0px;
+}
+
+nav li a {
+	padding-top: 10px;
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #595959;
+	text-decoration: none;
+}
+
+nav li a h1 {
+	margin: 0px;
+}
+
+nav li:hover {
+	background-color: rgb(34, 116, 165, 0.7);
+}
+
+nav li:hover .navLinkTitle {
+	color: #ededed;
+}
+
 nav {
 	position: fixed;
 	top: 0px;

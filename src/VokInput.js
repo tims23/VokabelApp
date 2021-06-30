@@ -47,7 +47,7 @@ export class VokInput extends Component {
 				}
 			}
 			this.setState({dSelected: false});
-		}, 500);
+		}, 250);
 	};
 
 	eUnFocusListener = () => {
@@ -87,7 +87,7 @@ export class VokInput extends Component {
 			>
 				<input
 					type="text"
-					className="D-VokInput"
+					className={this.state.eSelected || this.state.dSelected ? 'D-VokInput selected' : 'D-VokInput'}
 					id={'D-VokInput-'.concat(this.props.num)}
 					value={this.state.dVokValue}
 					onChange={this.dHandleChange}
@@ -96,7 +96,7 @@ export class VokInput extends Component {
 				/>
 				<input
 					type="text"
-					className="E-VokInput"
+					className={this.state.eSelected || this.state.dSelected ? 'E-VokInput selected' : 'E-VokInput'}
 					id={'E-VokInput-'.concat(this.props.num)}
 					value={this.state.eVokValue}
 					onChange={this.eHandleChange}
