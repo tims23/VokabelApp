@@ -1,0 +1,103 @@
+.GroupVisualizer-left,
+.GroupVisualizer-right {
+	width: fit-content;
+	height: fit-content;
+	position: relative;
+	top: 45vh;
+}
+
+.GroupVisualizer-left span:nth-child(1) {
+	transform: rotateZ(-45deg) translateY(4px);
+}
+
+.GroupVisualizer-left span:nth-child(2) {
+	transform: rotateZ(45deg) translateY(-4px);
+}
+
+.GroupVisualizer-right span:nth-child(1) {
+	transform: rotateZ(45deg) translateY(4px);
+}
+
+.GroupVisualizer-right span:nth-child(2) {
+	transform: rotateZ(-45deg) translateY(-4px);
+}
+
+.GroupVisualizer-left span,
+.GroupVisualizer-right span {
+	display: block;
+	width: 25px;
+	height: 4px;
+	border-radius: 3px;
+	background: #cdcdcd;
+}
+
+.GroupVisualizer-left span {
+	transform-origin: left;
+}
+
+.GroupVisualizer-right span {
+	transform-origin: right;
+}
+
+@media only screen and (max-width: 600px) {
+	.GroupVisualizer-ProgressBar {
+		width: 60%;
+		margin: 10px auto 10px auto;
+	}
+
+	.GroupVisualizer-content {
+		margin: 60px auto 10px auto;
+		width: 90%;
+	}
+
+	.GroupVisualizer-left {
+		left: 10px;
+	}
+
+	.GroupVisualizer-right {
+		left: 100vw;
+		transform: translateX(-100%) translateX(-10px);
+	}
+
+	.GroupVisualizer-left:hover {
+		transform: scale(1.1);
+	}
+
+	.GroupVisualizer-right:hover {
+		transform: translateX(-100%) translateX(-10px) scale(1.1);
+	}
+}
+
+@media only screen and (min-width: 601px) {
+	.GroupVisualizer-ProgressBar {
+		width: 80%;
+		margin: 10px auto 10px auto;
+	}
+
+	.GroupVisualizer-content {
+		margin: 60px auto 10px auto;
+		width: 80%;
+	}
+
+	.GroupVisualizer-left {
+		left: 30px;
+	}
+
+	.GroupVisualizer-right {
+		left: 100vw;
+		transform: translateX(-100%) translateX(-30px);
+	}
+
+	.GroupVisualizer-left:hover,
+	.GroupVisualizer-right:hover {
+		cursor: pointer;
+	}
+
+	.GroupVisualizer-left:hover {
+		transform: scale(1.1);
+	}
+
+	.GroupVisualizer-right:hover {
+		transform: translateX(-100%) translateX(-30px) scale(1.1);
+	}
+}

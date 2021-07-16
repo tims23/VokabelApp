@@ -26,7 +26,7 @@ export function ProgressBar(props) {
 				ref.current.style.width = 0 + '%';
 			}
 		},
-		[props.progress]
+		[props.count, props.progress]
 	);
 
 	return (

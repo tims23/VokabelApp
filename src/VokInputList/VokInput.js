@@ -1,8 +1,8 @@
 import './VokInput.css';
-import resize from './resize.png';
+import resize from '../pics/resize.png';
 
 import React, {Component} from 'react';
-import {addVokabel, updateVokabel} from './VokabelProvider';
+import {addVokabel, updateVokabel} from '../VokabelProvider';
 
 export class VokInput extends Component {
 	constructor(props) {

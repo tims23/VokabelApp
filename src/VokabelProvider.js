@@ -6,7 +6,7 @@ const uid = 'HXNM1uYn6jPll9IShBUc0fGYnMV2';
 //TODO: get UID dynamically
 
 const VokabelContext = createContext();
-const VokabelUpdateContext = createContext();
+const LearnedVokabelContext = createContext();
 
 const date = new Date();
 const currentDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -33,23 +33,33 @@ export function useVokabeln() {
 	return useContext(VokabelContext);
 }
 
+export function useLearnedVokabeln() {
+	//custom hook um auf gelernte Vokkabeln zurückzugreifen
+
+	return useContext(LearnedVokabelContext);
+}
+
 export async function addVokabel(vok) {
+	//Funktion zum hochladen neuer Vokabeln
+	//werden automatisch in Gruppe eingefügt
 	vok.LastModified = completeCurrentDay;
 	const res = await firestore().collection('Deutsch-Englisch').add(vok);
 	firestore().collection('Vokabelgruppen').where('Fuellung', '<', 7).get({source: 'cache'}).then((vk) => {
 		if (vk.docs.length > 0) {
+			//wenn es eine vorhandene Vokabelgruppe mit weniger als 7 Einträgen gibt wird die Vokabel hier eingefügt
 			const group = vk.docs[0];
 			var groupData = vk.docs[0].data();
 			if (group.data().Level < 2) {
-				groupData.Vokabeln = groupData.Vokabeln.concat({ID: res.id});
+				groupData.Vokabeln = groupData.Vokabeln.concat({ID: res.id, Position: ''});
 				groupData.LastModified = completeTimestamp;
 				groupData.Fuellung = groupData.Fuellung + 1;
 
 				firestore().collection('Vokabelgruppen').doc(group.id).set(groupData);
 			}
 		} else {
+			//wenn es keine vorhandene Vokabelgruppe mit weniger als 7 Einträgen gibt wird eine neue erstellt
 			const groupData = {
-				Vokabeln: [{ID: res.id}],
+				Vokabeln: [{ID: res.id, Position: ''}],
 				LastModified: completeTimestamp,
 				Fuellung: 1,
 				Datum: timestamp,
@@ -69,16 +79,41 @@ export function updateVokabel(ref, vok) {
 }
 
 function VokabelProvider({children}) {
-	const [groupID, setgroupID] = useState(0);
 	const [groups, setgroups] = useState([]);
+	const [learnedGroups, setlearnedGroups] = useState([]);
 
-	const connect = async () => {
-		const res = await firestore()
+	const getToLearn = async () => {
+		// Funktion, welche zu lernende Vokabelgruppen als Contex in einem Array speichert
+
+		const resToLearn = await firestore()
 			.collection('Vokabelgruppen')
 			.where('Datum', '<', timestamp) //Lädt Vokabelgruppen aus dem Cache, die
 			.where('UID', '==', uid) //heute gelernt werden sollen.
 			.get({source: 'cache'});
 
+		const resToLearnGroups = await getRawGroup(resToLearn);
+
+		setgroups(resToLearnGroups);
+	};
+
+	const getLearned = async () => {
+		// Funktion, welche die bereits gelernten Vokabelgruppen als Contex in einem Array speichert
+
+		console.log('done');
+
+		const resLearned = await firestore()
+			.collection('Vokabelgruppen')
+			.where('Gelernt', '==', timestamp) //Lädt Vokabelgruppen aus dem Cache, die
+			.where('UID', '==', uid) //heute gelernt wurden.
+			.get({source: 'cache'});
+
+		const resLearnedGroups = await getRawGroup(resLearned);
+
+		setlearnedGroups(resLearnedGroups);
+	};
+
+	const getRawGroup = async (res) => {
+		//
 		var groupPromise; //Es wird ein Promise benötigt, da die Daten asynchron von den Datenbank gelesen werden.
 		if (res.docs.length > 0) {
 			//Wenn es Vokabelgruppen gibt, die an diesem Tag gelernt werden sollen
@@ -99,82 +134,39 @@ function VokabelProvider({children}) {
 			});
 		} else {
 			console.log('Keine Vokabelgruppen gefunden');
+			groupPromise = [];
 		}
 		const resGroups = await groupPromise;
-		setgroups(resGroups);
+		return resGroups;
 	};
 
 	const getGroup = async (group) => {
-		//nimmt Vokabelgruppe als Eingabe und ersetzt VokabelIDs mit den konkreten Vokabel-Objekten
-		//var vokIDs = [];
-		//var vokPositions = [];
+		//Funktion, die eine leere Gruppe als Eingabe nimmt und die vokIDs durch konkrete Vokabeln ersetzt
 		var groupData = group.data();
 		groupData.ID = group.id;
-
-		console.log(groupData);
 
 		const res = new Promise((resove) => {
 			var vokContent = [];
 			groupData.Vokabeln.forEach(async (vokabel) => {
-				//vokIDs.push(vokabel.ID);
+				//zu jeder ID in der Liste wird die Vokabel mit "getVok(ID)" gesucht
 				var vok = await getVok(vokabel.ID);
 				vok.ID = vokabel.ID;
+				vok.Position = vokabel.Position;
 				vokContent.push(vok);
 				if (vokContent.length >= groupData.Vokabeln.length) {
 					resove(vokContent);
 				}
-				//vokPositions.push(vokabel.Position == undefined ? ' ' : vokabel.Position);
 			});
 		});
 
-		//const vokContent = await getVok(vokIDs, vokPositions); //Vokabeln werden mit ihren jeweilgen Positionen zusammengeführt
-
-		//groupData.Vokabeln = vokContent;
 		groupData.Vokabeln = await res;
-		//console.log(vokContent);
 		return groupData;
 	};
 
 	const getVok = async (vokID) => {
-		const vok = await firestore().collection('Deutsch-Englisch').doc(vokID).get();
+		//Funktion, eine ID als Eingabe nimmt und die dazugehörige Vokabel ausgibt
+		const vok = await firestore().collection('Deutsch-Englisch').doc(vokID).get({source: 'cache'});
 		return vok.data();
-		/*
-		const res = new Promise((resolve) => {
-			var vokContent = [];
-			vokIDs.forEach(async (element, index) => {
-				const vok = await firestore().collection('Deutsch-Englisch').doc(element).get();
-				console.log(vok.data());
-				const vokData = vok.data();
-				const vokObj = {
-					Position: vokPositions[index],
-					Deutsch: vokData.Deutsch,
-					Englisch: vokData.Englisch
-				};
-				vokContent.push(vokObj);
-			});
-
-			if (vokContent.length >= vokIDs.length) {
-				console.log(vokContent);
-				resolve(vokContent);
-			}
-		});
-		return res;
-
-		// const vok = await firestore().collection('Deutsch-Englisch').where('ID', 'in', vokIDs).get({source: 'cache'});
-		// var vokContent = [];
-		// var index = 0;
-		// vok.forEach((element) => {
-		// 	const vokData = element.data();
-		// 	const vokObj = {
-		// 		Position: vokPositions[index],
-		// 		Deutsch: vokData.Deutsch,
-		// 		Englisch: vokData.Englisch
-		// 	};
-		// 	vokContent.push(vokObj);
-		// 	index = index + 1;
-		// });
-		// return vokContent;
-		*/
 	};
 
 	useEffect(() => {
@@ -199,6 +191,10 @@ function VokabelProvider({children}) {
 			})
 			.then(() => {
 				//Wenn Offline-Funktion aktiviert wurde
+
+				getLearned(); //zuerst werden alle heute bereits gelernten Vokabeln aufgerufen. Dies geschieht einmalig beim aufrufen der App
+				//und wird nicht bei jeder Veränderung neu ausgeführt. So wird vermieden, dass sich Gruppen in der GUI doppeln.
+
 				firestore()
 					.collection('Vokabelgruppen')
 					.where('UID', '==', uid)
@@ -207,7 +203,7 @@ function VokabelProvider({children}) {
 						//Lädt neue Vokabelgruppen und Veränderungen in den Cache. Durch "onSnapshot" Echtzeit-Aktualisierung.
 						CookieFunktionen.setCookie('lastLogin', completeCurrentDay, 300);
 						console.log('Vokabelgruppen aktualisiert: ' + res.docs.length + ' Veränderungen ');
-						connect(); //Funktion, welche Vokabelgruppen mit konkreten Vokabeln aufbereitet und in "groups" dem Kontext zur Verfügung stellt
+						getToLearn(); //Funktion, welche Vokabelgruppen mit konkreten Vokabeln aufbereitet und in "groups" dem Kontext zur Verfügung stellt
 					});
 				firestore()
 					.collection('Deutsch-Englisch')
@@ -216,14 +212,16 @@ function VokabelProvider({children}) {
 						//Lädt neue Vokabeln und Veränderungen in den Cache. Durch "onSnapshot" Echtzeit-Aktualisierung.
 						CookieFunktionen.setCookie('lastLogin', completeCurrentDay, 300);
 						console.log('Vokabeln aktualisiert: ' + res.docs.length + ' Veränderungen ');
-						connect(); //Funktion, welche Vokabelgruppen mit konkreten Vokabeln aufbereitet und in "groups" dem Kontext zur Verfügung stellt
+						getToLearn(); //Funktion, welche Vokabelgruppen mit konkreten Vokabeln aufbereitet und in "groups" dem Kontext zur Verfügung stellt
 					});
 			});
 	}, []);
 
 	return (
 		<div>
-			<VokabelContext.Provider value={groups}>{children}</VokabelContext.Provider>
+			<VokabelContext.Provider value={groups}>
+				<LearnedVokabelContext.Provider value={learnedGroups}>{children}</LearnedVokabelContext.Provider>
+			</VokabelContext.Provider>
 		</div>
 	);
 }

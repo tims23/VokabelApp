@@ -32,12 +32,6 @@
 	right: 5px;
 }
 
-.grid-item .card:hover,
-.grid-item .card:hover .side-german,
-.grid-item .card:hover .side-english {
-	height: 130px;
-}
-
 .grid-item .card:hover .exchange,
 .grid-item .card:hover .resize {
 	opacity: 0.6;
@@ -66,6 +60,7 @@
 
 .side-german,
 .side-english {
+	transform-origin: center;
 	box-sizing: border-box;
 	backface-visibility: hidden;
 	position: absolute;
@@ -152,7 +147,48 @@
 	background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
 }
 
-.Pattern-ProgressBar {
-	width: 80%;
+.Pattern-Progress {
 	margin: 20px auto 20px auto;
+}
+
+@media only screen and (min-width: 1201px) {
+	.grid-item .card:hover,
+	.grid-item .card:hover .side-german,
+	.grid-item .card:hover .side-english {
+		height: 130px;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.grid-item .card {
+		height: 90px;
+		width: 150px;
+	}
+
+	.side-german,
+	.side-english {
+		height: 90px;
+		width: 150px;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.exchange,
+	.resize {
+		display: none;
+	}
+	.side-german,
+	.side-english {
+		display: none;
+	}
+
+	.grid-item .card {
+		margin: 15px auto 15px auto;
+		opacity: 0.9;
+		height: 60px;
+		width: 60px;
+		background-color: #ededed;
+		border-radius: 20px;
+		box-shadow: 1px 0px 8px #ededed;
+	}
 }

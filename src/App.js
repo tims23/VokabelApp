@@ -1,18 +1,11 @@
 import React, {useState} from 'react';
 import './App.css';
-import {firestore, SuspenseWithPerf} from 'reactfire';
-import Burrito from './Burrito';
+import {SuspenseWithPerf} from 'reactfire';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import Mathis from './Mathis';
-import Pattern from './Pattern';
-import LoadedPattern from './LoadedPattern';
-import ProgressBar from './ProgressBar';
-import Test from './Test';
-import BurgerMenu from './BurgerMenu';
-import SideBar from './SideBar';
+import GroupVisualizer from './GroupVisualizer';
+import SideBar from './Navigation/SideBar';
 import VokabelProvider from './VokabelProvider';
-import VokInput from './VokInput';
-import VokInputList from './VokInputList';
+import VokInputList from './VokInputList/VokInputList';
 
 function App() {
 	const [width, setwidth] = useState(0);
@@ -44,7 +37,7 @@ function App() {
 									fallback={<p>loading burrito status...</p>}
 									traceId={'load-burrito-status'}
 								>
-									<Test />
+									<GroupVisualizer />
 								</SuspenseWithPerf>
 							</Route>
 							<Route path="/Eingabe">
