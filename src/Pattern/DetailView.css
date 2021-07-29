@@ -1,0 +1,54 @@
+.DetailView {
+	box-sizing: border-box;
+	padding: 15px;
+	height: 80vh;
+	width: 100%;
+	margin: 0;
+	display: block;
+	left: 0px;
+	z-index: 3;
+	box-shadow: 1px 0px 8px #ededed;
+	background-color: #ededed;
+	border-radius: 20px;
+}
+
+.DetailView_hLine {
+	display: block;
+	width: 80%;
+	height: 0.5px;
+	margin: auto;
+	background-color: #595959;
+}
+
+.DetailView .Pattern_sideGerman,
+.DetailView .Pattern_sideEnglish {
+	height: 40%;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+@media only screen and (min-width: 601px) {
+	.grid-item .card:hover,
+	.grid-item .card:hover .Pattern_sideGerman,
+	.grid-item .card:hover .Pattern_sideEnglish {
+		height: 130px;
+	}
+
+	.DetailView {
+		height: 70vh;
+		width: 60vw;
+		position: static;
+		margin: auto;
+	}
+
+	.DetailView .Pattern_sideGerman,
+	.DetailView .Pattern_sideEnglish {
+		box-sizing: border-box;
+		width: 50%;
+		float: left;
+	}
+
+	.Pattern .hLine {
+		display: none;
+	}
+}

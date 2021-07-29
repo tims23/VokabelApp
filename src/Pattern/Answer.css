@@ -1,0 +1,44 @@
+.Answer {
+	clear: both;
+	width: 100%;
+	height: 30px;
+}
+
+.Answer_correct,
+.Answer_wrong {
+	opacity: 0.7;
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+
+.Answer_correct img,
+.Answer_wrong img {
+	margin-top: 2.5px;
+	width: 25px;
+}
+
+.Answer_correct:hover,
+.Answer_wrong:hover {
+	cursor: pointer;
+}
+
+.Answer_correct:hover {
+	transform: translateX(-3px) scale(1.1);
+}
+
+.Answer_wrong:hover {
+	transform: translateX(3px) scale(1.1);
+}
+
+.Answer_correct {
+	border-radius: 10px 0px 0px 10px;
+	margin-left: 20%;
+	background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.Answer_wrong {
+	border-radius: 0px 10px 10px 0px;
+	margin-right: 20%;
+	background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}

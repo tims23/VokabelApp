@@ -19,6 +19,7 @@ function GroupVisualizer() {
 		//verändert werden und gleichzeitig alle gelernten Gruppen angezeigt werden. Wenn das Objekt nicht kloniert würde, würde es bei
 		//Veränderung nicht mehr in der Abfrage auftauchen und die group würde aus der GUI verschwinden.
 
+		/*
 		firestore()
 			.collection('Vokabelgruppen')
 			.doc(group.ID)
@@ -28,6 +29,7 @@ function GroupVisualizer() {
 		if (index < groups.length - 1) {
 			setindex(index + 1);
 		}
+		*/
 	};
 
 	useEffect(

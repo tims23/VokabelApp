@@ -1,0 +1,83 @@
+.TurnableCard:hover .exchange,
+.TurnableCard:hover .resize {
+	opacity: 0.6;
+}
+
+.TurnableCard .Answer_correct,
+.TurnableCard .Answer_wrong {
+	opacity: 0;
+}
+
+.TurnableCard:hover .Answer_correct,
+.TurnableCard:hover .Answer_wrong {
+	opacity: 0.7;
+}
+
+.exchange:hover,
+.resize:hover {
+	transform: scale(1.1);
+	box-shadow: 1px 1px 3px #595959;
+
+	cursor: pointer;
+}
+
+.TurnableCard {
+	margin: auto;
+	height: 90px;
+	width: 210px;
+	transition: transform 0.8s;
+	transform-style: preserve-3d;
+}
+
+.TurnableCard .Pattern_sideGerman,
+.TurnableCard .Pattern_sideEnglish {
+	transform-origin: center;
+	box-sizing: border-box;
+	backface-visibility: hidden;
+	position: absolute;
+	height: 90px;
+	width: 210px;
+	padding: 5px 5px;
+	background: #ededed;
+	border-radius: 18px;
+	box-shadow: 1px 0px 15px #ededed;
+	margin: auto;
+}
+
+.TurnableCard.clicked {
+	transform: rotateY(180deg);
+}
+
+.TurnableCard .Pattern_sideGerman {
+	transform: rotateY(-180deg);
+}
+
+.Vokabel_smallCard {
+	margin: 15px auto 15px auto;
+	height: 60px;
+	width: 60px;
+	background-color: #ededed;
+	border-radius: 20px;
+	box-shadow: 1px 0px 8px #ededed;
+}
+
+@media only screen and (min-width: 601px) {
+	.TurnableCard:hover,
+	.TurnableCard:hover .Pattern_sideGerman,
+	.TurnableCard:hover .Pattern_sideEnglish {
+		height: 130px;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.TurnableCard {
+		height: 90px;
+		width: 150px;
+	}
+
+	.TurnableCard .Pattern_sideEnglish,
+	.TurnableCard .Pattern_sideGerman {
+		height: 90px;
+		width: 150px;
+	}
+}
