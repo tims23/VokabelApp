@@ -58,8 +58,9 @@ export async function addVokabel(vok) {
 			}
 		} else {
 			//wenn es keine vorhandene Vokabelgruppe mit weniger als 7 Einträgen gibt wird eine neue erstellt
+			const randI = Math.floor(Math.random() * 10) + 1;
 			const groupData = {
-				Vokabeln: [{ID: res.id, Position: ''}],
+				Vokabeln: [{ID: res.id, Position: '' + randI + '/' + (randI + 2)} + ''],
 				LastModified: completeTimestamp,
 				Fuellung: 1,
 				Datum: timestamp,
@@ -87,11 +88,13 @@ function VokabelProvider({children}) {
 
 		const resToLearn = await firestore()
 			.collection('Vokabelgruppen')
-			.where('Datum', '<', timestamp) //Lädt Vokabelgruppen aus dem Cache, die
+			.where('Datum', '<=', timestamp) //Lädt Vokabelgruppen aus dem Cache, die
 			.where('UID', '==', uid) //heute gelernt werden sollen.
 			.get({source: 'cache'});
 
 		const resToLearnGroups = await getRawGroup(resToLearn);
+
+		console.log(resToLearnGroups);
 
 		setgroups(resToLearnGroups);
 	};
@@ -106,6 +109,8 @@ function VokabelProvider({children}) {
 			.where('Gelernt', '==', timestamp) //Lädt Vokabelgruppen aus dem Cache, die
 			.where('UID', '==', uid) //heute gelernt wurden.
 			.get({source: 'cache'});
+
+		console.log(resLearned.docs.length);
 
 		const resLearnedGroups = await getRawGroup(resLearned);
 

@@ -5,17 +5,31 @@
 }
 
 .VokInputList {
-	width: calc(100% - 85px - 85px);
-	margin-left: 85px;
-	margin-right: 85px;
+	width: 80%;
+	margin: auto;
 }
 
-.VokInputList div h1 {
+@media only screen and (max-width: 800px) {
+	.VokInputList {
+		width: calc(100% - 10px - 10px);
+		margin: auto;
+	}
+}
+
+.VokInputList button {
+	background: none;
+	border: none;
+}
+
+.VokInputList button h1 {
 	transition: ease-in-out 0.2s;
+	transform-origin: center;
 	cursor: pointer;
+	color: #cdcdcd;
+	font-size: xx-large;
 }
 
-.VokInputList div h1:hover {
+.VokInputList button h1:hover {
 	transform: scale(1.1);
 }
 
@@ -24,6 +38,12 @@
 	position: sticky;
 	top: 0px;
 	background-color: #232323;
+}
+
+@media only screen and (max-width: 602px) {
+	.labels {
+		display: none;
+	}
 }
 
 .labels div {

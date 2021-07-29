@@ -41,15 +41,7 @@ function GroupVisualizer() {
 		() => {
 			setgroups(learnedGroups.concat(vokabeln));
 		},
-		[vokabeln]
-	);
-
-	useEffect(
-		() => {
-			console.log(learnedGroups);
-			setgroups(learnedGroups.concat(vokabeln));
-		},
-		[learnedGroups]
+		[vokabeln, learnedGroups]
 	);
 
 	return (
@@ -84,8 +76,11 @@ function GroupVisualizer() {
 			</div>
 			<div className="GroupVisualizer-content">
 				{groups.map((group, i) => (
-					<div style={i === index ? {display: 'block'} : {display: 'none'}} key={i}>
-						<Pattern group={group} subbmit={next} />
+					<div
+						style={i === index ? {display: 'block', width: '100%'} : {display: 'none', width: '100%'}}
+						key={i}
+					>
+						<Pattern key={i} group={group} subbmit={next} />
 					</div>
 				))}
 			</div>

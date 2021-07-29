@@ -1,3 +1,11 @@
+.SideBar {
+	top: 0px;
+	position: sticky;
+	flex: auto;
+	flex-grow: 0;
+	width: fit-content;
+}
+
 body {
 	background: #232323;
 	color: #cdcdcd;
@@ -5,7 +13,7 @@ body {
 }
 
 #BurgerMenu {
-	z-index: 3;
+	z-index: 6;
 	position: fixed;
 	left: 30px;
 	top: 30px;
@@ -14,18 +22,21 @@ body {
 }
 
 #BurgerMenu.clicked {
-	z-index: 3;
+	z-index: 6;
 	position: fixed;
 	left: 340px;
 	top: 30px;
 }
 
 ul {
-	margin-top: 85px;
+	opacity: 0;
+	margin-top: 0px;
 	list-style-type: none;
+	transition: opacity ease-in-out 0.1s 0s;
 }
 
 nav li {
+	margin: 0;
 	height: 50px;
 	transition: all ease-in 0.2s;
 }
@@ -56,33 +67,27 @@ nav li:hover .navLinkTitle {
 }
 
 nav {
-	position: fixed;
+	box-sizing: border-box;
+	padding-top: 85px;
+	position: sticky;
 	top: 0px;
-	height: 100%;
+	height: 100vh;
+	width: 0px;
 	background: #ededed;
-	transition: left ease-in-out 0.5s, color 0.5s cubic-bezier(0.7, 0.2, 0.05, 1.0);
+	transition: width ease-in-out 0.4s, color 0.4s cubic-bezier(0.7, 0.2, 0.05, 1.0);
 }
 
 nav.clicked {
 	color: #595959;
-
-	left: 0%;
+	width: 400px;
 }
 
 nav.clicked #BurgerMenu {
 	left: 200px;
 }
 
-@media only screen and (min-width: 601px) {
-	nav {
-		width: 400px;
-		left: -400px;
-	}
-}
-
 @media only screen and (max-width: 600px) {
-	nav {
+	nav.clicked {
 		width: 100vw;
-		left: -100vw;
 	}
 }

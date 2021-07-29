@@ -17,7 +17,7 @@ function VokInputList() {
 				</div>
 			</div>
 			<div className="list">{listItems}</div>
-			<div
+			<button
 				onClick={() => {
 					const currentState = state;
 					const nextState = currentState.concat({});
@@ -25,7 +25,7 @@ function VokInputList() {
 				}}
 			>
 				<h1>+</h1>
-			</div>
+			</button>
 		</div>
 	);
 }

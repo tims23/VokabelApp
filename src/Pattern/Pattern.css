@@ -1,8 +1,10 @@
-.grid-container {
+.Pattern_gridContainer {
 	display: grid;
 	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto;
 	align-content: center;
 	grid-gap: 10px;
+	width: 90%;
+	margin: auto;
 }
 
 .grid-item {
@@ -58,8 +60,8 @@
 	transform-style: preserve-3d;
 }
 
-.side-german,
-.side-english {
+.card .Pattern_sideGerman,
+.card .Pattern_sideEnglish {
 	transform-origin: center;
 	box-sizing: border-box;
 	backface-visibility: hidden;
@@ -77,7 +79,7 @@
 	transform: rotateY(180deg);
 }
 
-.side-german {
+.card .Pattern_sideGerman {
 	transform: rotateY(-180deg);
 }
 
@@ -85,17 +87,17 @@
 	margin: 0px;
 }
 
-.grid-item .side-english h4 {
+.Pattern_sideEnglish h4 {
 	color: mediumseagreen;
 	margin: 0px;
 }
 
-.grid-item .side-german h4 {
+.Pattern_sideGerman h4 {
 	color: tomato;
 	margin: 0px;
 }
 
-.grid-item h2 {
+.Pattern h2 {
 	overflow: hidden;
 	text-overflow: clip;
 	color: #595959;
@@ -104,16 +106,22 @@
 }
 
 .answer {
+	clear: both;
 	width: 100%;
 	height: 30px;
 }
 
 .correct,
 .wrong {
-	opacity: 0;
+	opacity: 0.7;
 	width: 30%;
 	height: 100%;
 	float: left;
+}
+
+.card .correct,
+.card .wrong {
+	opacity: 0;
 }
 
 .correct img,
@@ -151,11 +159,58 @@
 	margin: 20px auto 20px auto;
 }
 
-@media only screen and (min-width: 1201px) {
+.DetailView {
+	box-sizing: border-box;
+	padding: 15px;
+	height: 80vh;
+	width: 100%;
+	margin: 0;
+	display: block;
+	left: 0px;
+	z-index: 3;
+	box-shadow: 1px 0px 8px #ededed;
+	background-color: #ededed;
+	border-radius: 20px;
+}
+
+.Pattern .hLine {
+	display: block;
+	width: 80%;
+	height: 0.5px;
+	margin: auto;
+	background-color: #595959;
+}
+
+.DetailView .Pattern_sideGerman,
+.DetailView .Pattern_sideEnglish {
+	height: 40%;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+@media only screen and (min-width: 601px) {
 	.grid-item .card:hover,
-	.grid-item .card:hover .side-german,
-	.grid-item .card:hover .side-english {
+	.grid-item .card:hover .Pattern_sideGerman,
+	.grid-item .card:hover .Pattern_sideEnglish {
 		height: 130px;
+	}
+
+	.DetailView {
+		height: 70vh;
+		width: 60vw;
+		position: static;
+		margin: auto;
+	}
+
+	.DetailView .Pattern_sideGerman,
+	.DetailView .Pattern_sideEnglish {
+		box-sizing: border-box;
+		width: 50%;
+		float: left;
+	}
+
+	.Pattern .hLine {
+		display: none;
 	}
 }
 
@@ -165,30 +220,48 @@
 		width: 150px;
 	}
 
-	.side-german,
-	.side-english {
+	.card .Pattern_sideEnglish,
+	.card .Pattern_sideGerman {
 		height: 90px;
 		width: 150px;
 	}
 }
 
-@media only screen and (max-width: 600px) {
-	.exchange,
-	.resize {
-		display: none;
-	}
-	.side-german,
-	.side-english {
-		display: none;
-	}
+.Vokabel_smallCard {
+	margin: 15px auto 15px auto;
+	height: 60px;
+	width: 60px;
+	background-color: #ededed;
+	border-radius: 20px;
+	box-shadow: 1px 0px 8px #ededed;
+}
 
-	.grid-item .card {
-		margin: 15px auto 15px auto;
-		opacity: 0.9;
-		height: 60px;
-		width: 60px;
-		background-color: #ededed;
-		border-radius: 20px;
-		box-shadow: 1px 0px 8px #ededed;
-	}
+.Pattern_DetailView-enter {
+	opacity: 0;
+}
+.Pattern_DetailView-enter-active {
+	opacity: 1;
+	transition: opacity 300ms;
+}
+.Pattern_DetailView-exit {
+	opacity: 1;
+}
+.Pattern_DetailView-exit-active {
+	opacity: 0;
+	transition: opacity 300ms;
+}
+
+.Pattern_GridView-enter {
+	opacity: 0;
+}
+.Pattern_GridView-enter-active {
+	opacity: 1;
+	transition: opacity 300ms;
+}
+.Pattern_GridView-exit {
+	opacity: 1;
+}
+.Pattern_GridView-exit-active {
+	opacity: 0;
+	transition: opacity 300ms;
 }

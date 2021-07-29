@@ -1,33 +1,32 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import './BurgerMenu.css';
 
-export class BurgerMenu extends Component {
-	constructor(props) {
-		super(props);
+export function BurgerMenu(props) {
+	const [clicked, setclicked] = useState(false);
 
-		this.state = {
-			clicked: false
-		};
-	}
+	useEffect(
+		() => {
+			setclicked(props.activated);
+		},
+		[props.activated]
+	);
 
-	render() {
-		return (
-			<div
-				id="BurgerMenu"
-				className={this.state.clicked ? 'clicked' : null}
-				onClick={() => {
-					this.setState({clicked: !this.state.clicked});
-					if (this.props.onClick != null) {
-						this.props.onClick();
-					}
-				}}
-			>
-				<span />
-				<span />
-				<span />
-			</div>
-		);
-	}
+	return (
+		<div
+			id="BurgerMenu"
+			className={clicked ? 'clicked' : null}
+			onClick={() => {
+				setclicked(!clicked);
+				if (props.onClick != null) {
+					props.onClick();
+				}
+			}}
+		>
+			<span />
+			<span />
+			<span />
+		</div>
+	);
 }
 
 export default BurgerMenu;

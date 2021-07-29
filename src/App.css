@@ -2,6 +2,11 @@
 	text-align: center;
 }
 
+.App_flexLayout {
+	display: flex;
+}
+
 #content {
-	transition: margin-left ease-in-out 0.5s, width ease-in-out 0.5s;
+	flex: auto;
+	transition: opacity ease-in-out 0.5s, width ease-in-out 0.5s;
 }
